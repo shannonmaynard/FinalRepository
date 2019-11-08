@@ -1,3 +1,24 @@
+var dispDiv = document.getElementById("display");
+var gheight = 0;
+
+setInterval(function(){
+    var b = Math.round(Math.random()*100);
+    var rg = Math.round(Math.random()*30);
+    dispDiv.style.backgroundColor = "rgb("+rg+","+rg+","+b+")";
+},5000);
+function make10Snows(){
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+}
+
 function​ ​makeItSnow​(){
 ​var​ ​snow​ = ​document​.​createElement​(​"div"​);
 ​snow​.​innerHTML​ = ​'<svg class="svgs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85
@@ -26,3 +47,29 @@ function​ ​makeItSnow​(){
 ​gheight​ += ​0.1​; ​document​.​getElementById​(​"ground"​).​style​.​height​ = ​gheight​+​"px"​;
 }, ​10000​); }, ​10​);
 }
+
+
+var timer = null;
+document.getElementById("start").addEventListener("click", function(){
+    //document.getElementById("snow").style.top = "100%";
+    //document.getElementById("snow2").style.top = "100%";
+    if(timer == null){
+      timer = setInterval(make10Snows, 500);
+    }
+});
+
+document.getElementById("stop").addEventListener("click", function(){
+  clearInterval(timer);
+  timer = null;
+});
+
+document.getElementById("freq").addEventListener("change", function(){
+  if(timer != null){
+    
+  clearInterval(timer);
+   var mnum = document.getElementById("freq").value;
+    mnum = parseInt(mnum) * 100;
+    var spd = 1100 - mnum;
+    timer = setInterval(make10Snows, spd);
+  }
+});
